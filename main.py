@@ -6,11 +6,9 @@ from flask_wtf import FlaskForm
 from wtforms import EmailField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
 
+import data.jobs
 from data import db_session
-from data.db_session import SqlAlchemyBase
 from data.users import User
-
-from data.news_api import blueprint
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "legdphb40wbpkwgphobdslzkpPKOVpvkeowjvbe20jasjOPJPJOvjovpbJOPBopwv"
@@ -132,6 +130,13 @@ if __name__ == '__main__':
     user4.email = "Absolutely_normal_man@mars.org"
     db_sess.add(user4)
 
+    job1 = data.jobs.Jobs()
+    job1.team_leader = 1
+    job1.job = "deployment of residential modules 1 and 2"
+    job1.work_size = 15
+    job1.collaborators = "2, 3"
+    job1.start_date = datetime.datetime.now()
+    job1.is_finished = False
     db_sess.commit()
 
 # @app.route("/login", methods=["GET", "POST"])
